@@ -2,29 +2,22 @@
 
 namespace UserBundle\Controller\Api;
 
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Swagger\Annotations as SWG;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
-/**
- * @Route("/api")
- */
 class TokenController extends Controller
 {
     /**
-     * @Route("/tokens")
-     * @Method("POST")
-     * @ApiDoc(
-     *   resource=false,
-     *   description="Basic authentication endpoint.",
-     *   statusCodes={
-     *     200="Returned when successful"
-     *   }
+     * @Route("/api/tokens", methods={"POST"})
+     * @SWG\Response(
+     *   response=200,
+     *   description="Returns user token when valid basic auth is sent",
      * )
+     * @SWG\Tag(name="tokens")
      */
     public function newTokenAction(Request $request)
     {
@@ -53,23 +46,18 @@ class TokenController extends Controller
     }
 
     /**
-     * @Route("/tokens/check")
-     * @Method("GET")
-     * @ApiDoc(
-     *   resource=false,
-     *   description="Checks if token is valid.",
-     *   headers={
-     *     {
-     *       "name"="Authorization",
-     *       "required"=true,
-     *       "description"="Authorization key"
-     *     }
-     *   },
-     *   statusCodes={
-     *     200="Returned when successful",
-     *     403="Returned when the user is not authorized"
-     *   }
+     * @Route("/api/tokens/check", methods={"GET"})
+     * @SWG\Response(
+     *   response=200,
+     *   description="Returns successful if user is valid",
      * )
+     * @SWG\Parameter(
+     *   name="Authorization",
+     *   in="header",
+     *   required=true,
+     *   type="string"
+     * )
+     * @SWG\Tag(name="tokens")
      */
     public function checkTokenAction(Request $request)
     {
