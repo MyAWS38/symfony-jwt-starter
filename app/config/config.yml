@@ -61,6 +61,9 @@ lexik_jwt_authentication:
     public_key_path: '%kernel.root_dir%/../var/jwt/public.pem'
     pass_phrase: "%jwt_key_pass_phrase%"
 
+nelmio_api_doc:
+    name: 'API documentation'
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
