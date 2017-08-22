@@ -45,3 +45,7 @@ services:
 
     user.api.response_factory:
         class: UserBundle\Api\ResponseFactory
+
+    user.user_util:
+        class: UserBundle\Util\UserUtil
+        arguments: ['@service_container']

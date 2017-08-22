@@ -1,11 +1,17 @@
+app.swagger_ui:
+    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    prefix:   /api/doc
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
 user:
     resource: "@UserBundle/Controller/"
-    type:     annotation
+    type: annotation
 
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
