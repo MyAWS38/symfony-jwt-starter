@@ -26,7 +26,7 @@ review the `Makefile`.
 
 2) Update `app/config/parameters.yml` with the relevant parameters.
 
-3) Initialize the project
+3) Initialize the project with fixtures data.
 
 ```
 # Delete old db, create new one, and install fixtures.
@@ -48,3 +48,14 @@ Run the following command to serve the project locally for development.
 ```
 make serve
 ```
+
+This should run the server at: `http://localhost:8000`.
+
+There is a traditional login and UI for user administration.
+
+For development, the data fixtures are setup to add 2 users:
+
+admin: `admin@example.com` / `secret123`
+user: `user@example.com` / `secret123`
+
+You will find the fixtures defined in `src/AppBundle/ORM/LoadFixtures.php`.
