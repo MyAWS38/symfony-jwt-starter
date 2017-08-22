@@ -1,0 +1,39 @@
+{% extends 'base_bare.html.twig' %}
+
+{% block body %}
+
+    <div class="row sub-header">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3 text-sm-center">
+            Create an Account
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="card card-block">
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                <div class="form-group field-email">
+                    {{ form_row(form.email) }}
+                </div>
+
+                <div class="form-group field-pass">
+                    {{ form_row(form.plainPassword.first, {'label': 'Password'}) }}
+                </div>
+
+                <div class="form-group field-pass2">
+                    {{ form_row(form.plainPassword.second, {'label': 'Repeat Password'}) }}
+                </div>
+
+                <button type="submit" class="btn btn-block btn-success" tabindex="3">Create Account</button>
+                {{ form_end(form) }}
+            </div>
+
+            <div class="card card-block text-md-center sub-card">
+                Already have an account? <a href="{{ path('security_login') }}">Sign in.</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

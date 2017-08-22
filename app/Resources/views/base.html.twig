@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}YARS{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            Site Name
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <a href="#"
+               class="nav-link{% if app.request.attributes.get('_route') starts with 'link_1_' %} active{% endif %}">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Link 1</span>
+            </a>
+            <a href="#"
+               class="nav-link{% if app.request.attributes.get('_route') starts with 'link_2_' %} active{% endif %}">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Link 2</span>
+            </a>
+
+            <span class="nav-item divider-vertical"></span>
+
+            <a href="#"
+               class="nav-link{% if app.request.attributes.get('_route') starts with 'alt_link_1' %} active{% endif %}">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Alt Link</span>
+            </a>
+
+        </div>
+        <div class="navbar-collapse justify-content-end" id="user-menu">
+            <ul class="navbar-nav">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item btn-group ">
+                        <a class="nav-link dropdown-toggle user-name" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i> <span class="hidden-sm-down">{{ app.user.displayName }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuProfile">
+                            <div class="dropdown-item">
+                                Signed in as<br /><em>{{ app.user.displayName }}</em>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-user" aria-hidden="true"></i> Your profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('security_logout') }}">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
+                            </a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_login') }}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Sign in
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 main">
+            <main>
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times; &nbsp;</span>
+                                    </button>
+                                    {{ flashMessage|trans }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% block body %}{% endblock %}
+            </main>
+        </div>
+    </div>
+</div>
+
+<footer>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/tether/dist/js/tether.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>

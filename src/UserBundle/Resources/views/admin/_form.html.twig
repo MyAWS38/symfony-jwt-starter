@@ -1,0 +1,26 @@
+
+    {{ form_start(userForm) }}
+    <div class="md-form">
+        {{ form_row(userForm.email) }}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="md-form">
+                {{ form_row(userForm.name) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_row(userForm.roles, { 'attr': {'class': 'mdb-select'} }) }}
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <div class="btn-group" role="group" aria-label="Actions">
+                <a href="{{ path('admin_user_list') }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary pull-right" formnovalidate>Save</button>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(userForm) }}

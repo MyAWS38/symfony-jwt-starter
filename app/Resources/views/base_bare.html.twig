@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="bare">
+    <div class="container">
+        <div class="row header">
+            <div class="col-md-6 offset-md-3 text-sm-center">
+                <!--a href="{{ path('homepage') }}">
+                    <img class="logo-icon" src="{{ asset('images/logo.png') }}">
+                </a-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ flashMessage|trans }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div class="col-md-4 offset-md-4 text-sm-center">
+            <a class="small" href="#">Terms</a>
+            <a class="small" href="#">Privacy</a>
+            <a class="small" href="#">Security</a>
+            <a class="small" href="#">Contact</a>
+        </div>
+    </footer>
+
+    {% block javascripts %}
+        <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/tether/dist/js/tether.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+
+</body>
+</html>
