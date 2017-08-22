@@ -56,6 +56,7 @@ There is a traditional login and UI for user administration.
 For development, the data fixtures are setup to add 2 users:
 
 admin: `admin@example.com` / `secret123`
+
 user: `user@example.com` / `secret123`
 
 You will find the fixtures defined in `src/AppBundle/ORM/LoadFixtures.php`.
